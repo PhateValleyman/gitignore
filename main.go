@@ -37,6 +37,7 @@ func main() {
 
 	flag.BoolVar(helpFlag, "h", false, "Zobrazit napovedu")
 	flag.BoolVar(versionFlag, "v", false, "Zobrazit verzi")
+	flag.Usage = showHelp
 	flag.Parse()
 
 	if *helpFlag {
@@ -72,17 +73,19 @@ func main() {
 }
 
 func showHelp() {
-	help := `\033[1;34mPoužití:\033[0m
+	help := `
+Použití:
   gitignore-auto [volby]
 
-\033[1;34mPopis:\033[0m
+Popis:
   Automaticky rozpozná typ projektu a přidá odpovídající .gitignore z GitHubu
 
-\033[1;34mVolby:\033[0m
-  -h, --help       Zobrazí tuto nápovědu
-  -v, --version    Zobrazí verzi nástroje a autora
-  --lang=JAZYKY    Přepíše automatickou detekci, např. --lang=Go,Python`
-	fmt.Println(help)
+Volby:
+  -h, --help         Zobrazí tuto nápovědu
+  -v, --version      Zobrazí verzi nástroje a autora
+  --lang=JAZYKY      Přepíše automatickou detekci, např. --lang=Go,Python
+`
+	fmt.Printf("%s\n", help)
 }
 
 func checkGitRepo() {
